@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#22164c" />
+  <meta name="description" content="DemoWay: recorre el camino de la democracia con Mocra, un búho profesor. Juego educativo para 1 a 4 jugadores." />
+  <title>DemoWay | El camino de la democracia</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="styles.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" id="homeBtn" aria-label="Volver al inicio">
+        <span class="brand-mark" aria-hidden="true">D<span>✦</span></span>
+        <span class="brand-copy"><strong>Demo<span>Way</span></strong><small>EL CAMINO DE LA DEMOCRACIA</small></span>
+      </button>
+      <div class="topbar-actions">
+        <span class="topbar-tag">UN JUEGO PARA DECIDIR MEJOR</span>
+        <button type="button" class="sound-toggle" id="soundBtn" aria-label="Activar o desactivar sonidos" aria-pressed="true" title="Sonido">♫</button>
+      </div>
+    </header>
+
+    <main id="mainContent">
+      <section id="screen-home" class="screen screen-home active" aria-labelledby="homeTitle">
+        <div class="hero-card">
+          <div class="hero-light hero-light-one"></div><div class="hero-light hero-light-two"></div>
+          <div class="hero-copy">
+            <div class="eyebrow"><span class="eyebrow-dot"></span> CONSTITUCIÓN + DEMOCRACIA + AVENTURA</div>
+            <h1 id="homeTitle">¡El futuro se <span>decide jugando!</span></h1>
+            <p>Rueda el dado, recorre la ciudad de los derechos y toma decisiones que cambian tu camino. <strong>¡Mocra te acompaña!</strong></p>
+            <div class="hero-actions">
+              <button class="btn btn-primary btn-large" id="playBtn">Comenzar aventura <span aria-hidden="true">➜</span></button>
+              <button class="btn btn-glass" id="tutorialHomeBtn">¿Cómo se juega?</button>
+            </div>
+            <div class="hero-tags"><span>🎲 Dado animado</span><span>👥 1–4 jugadores</span><span>⚡ Modo Expo</span></div>
+          </div>
+          <div class="hero-mocra">
+            <div class="mocra-glow"></div>
+            <div class="hero-speech">¡Hola! Soy <b>Mocra</b>.<br />¿Listos para decidir?</div>
+            <div class="mocra-mount mocra-large" data-mocra></div>
+            <span class="float-symbol symbol-one">✦</span><span class="float-symbol symbol-two">★</span><span class="float-symbol symbol-three">✳</span>
+          </div>
+        </div>
+        <div class="home-features">
+          <div class="feature"><span class="feature-icon icon-purple">⚖</span><div><b>Aprende tus derechos</b><p>Situaciones de la vida real y explicaciones fáciles.</p></div></div>
+          <div class="feature"><span class="feature-icon icon-orange">🗳</span><div><b>Decide en comunidad</b><p>Todos participan en las votaciones del camino.</p></div></div>
+          <div class="feature"><span class="feature-icon icon-green">🏆</span><div><b>Conquista la meta</b><p>Gana puntos de ciudadanía y supera a tus rivales.</p></div></div>
+        </div>
+        <div class="home-footer"><span>Proyecto educativo • Constitución y Democracia</span><button class="plain-link" id="creditsBtn">Créditos y fuentes ↗</button></div>
+      </section>
+
+      <section id="screen-setup" class="screen" aria-labelledby="setupTitle">
+        <div class="section-heading"><button class="back-btn" data-go="home">‹ Volver</button><span class="eyebrow">PREPARA TU PARTIDA</span><h2 id="setupTitle">Armemos el equipo <span>ciudadano</span></h2><p>Elige el modo y asigna nombres. En un mismo dispositivo, los jugadores se turnan para participar.</p></div>
+        <div class="setup-layout">
+          <div class="setup-card">
+            <h3>01 <span>Elige una aventura</span></h3>
+            <div class="mode-cards" role="radiogroup" aria-label="Modo de juego">
+              <button class="mode-card selected" type="button" data-mode="expo" role="radio" aria-checked="true"><span class="mode-emoji">⚡</span><strong>Modo Expo</strong><small>3 rondas por jugador · puntuación rápida</small><span class="selected-pill">RECOMENDADO</span></button>
+              <button class="mode-card" type="button" data-mode="completo" role="radio" aria-checked="false"><span class="mode-emoji">🗺️</span><strong>Aventura completa</strong><small>Recorre todo el mapa · llega a la meta</small></button>
+            </div>
+            <h3>02 <span>¿Cuántos juegan?</span></h3>
+            <div class="counter-row"><label for="playersRange">Jugadores locales</label><div class="counter-controls"><button id="minusPlayers" aria-label="Quitar jugador">−</button><strong id="playerNumber">2</strong><button id="plusPlayers" aria-label="Agregar jugador">+</button></div></div>
+            <input id="playersRange" class="sr-only" type="range" min="1" max="4" step="1" value="2" aria-label="Cantidad de jugadores" />
+            <div id="nameInputs" class="name-inputs"></div>
+            <button id="startBtn" class="btn btn-primary btn-full">Continuar al tutorial <span>➜</span></button>
+          </div>
+          <aside class="setup-side"><div class="mocra-mount mocra-medium" data-mocra></div><div class="speech-card"><span>CONSEJO DE MOCRA</span><p>“No necesitas saberlo todo. ¡En DemoWay cada decisión te enseña algo nuevo!”</p></div><div class="tip-card">✅ Sin registros ni cuentas<br/>✅ Funciona sin conexión<br/>✅ Adaptado para celulares</div></aside>
+        </div>
+      </section>
+
+      <section id="screen-game" class="screen" aria-labelledby="gameTitle">
+        <div class="game-toolbar"><div><span class="eyebrow">AVENTURA CIUDADANA</span><h2 id="gameTitle">Tu camino, <span>tus decisiones.</span></h2></div><div class="game-toolbar-actions"><span class="round-label" id="roundLabel">Ronda 1 de 3</span><button class="btn btn-outline btn-small" id="restartBtn">↺ Reiniciar</button></div></div>
+        <div class="game-layout">
+          <section class="board-panel" aria-label="Tablero de DemoWay">
+            <div class="board-header"><span class="board-kicker">✦ CIUDAD DE DEMOWAY</span><div class="board-legend"><span><i class="dot dot-question"></i> Reto</span><span><i class="dot dot-vote"></i> Voto</span><span><i class="dot dot-bonus"></i> Bonus</span></div></div>
+            <div class="board-map" id="boardMap">
+              <div class="map-decoration map-skyline">▥ ▤ ▥ ▤ ▥</div><div class="map-decoration map-cloud cloud-a">☁</div><div class="map-decoration map-cloud cloud-b">☁</div>
+              <span class="map-landmark landmark-one">ESCUELA<br/>CIUDADANA</span><span class="map-landmark landmark-two">PLAZA DE<br/>LA DEMOCRACIA</span>
+              <svg class="trail-lines" id="trailLines" viewBox="0 0 1000 1000" aria-hidden="true" preserveAspectRatio="none"><path id="trailPath" d="" /></svg>
+              <div id="boardNodes" class="board-nodes"></div>
+            </div>
+            <div class="board-caption"><span>🏁 INICIO: ESCUELA CIUDADANA</span><span>🏛 META: PLAZA DE LA CONSTITUCIÓN</span></div>
+          </section>
+          <aside class="game-sidebar">
+            <section class="turn-card" aria-label="Turno actual"><span class="mini-label">AHORA ES EL TURNO DE</span><div id="currentPlayer" class="current-player"></div><div id="die" class="die" aria-live="polite" aria-label="Dado">⚄</div><button id="rollBtn" class="btn btn-primary btn-full">🎲 Lanzar dado</button><p class="turn-hint" id="turnHint">¡Tira el dado para avanzar!</p></section>
+            <section class="score-card"><div class="panel-top"><strong>🏆 Tabla ciudadana</strong><span id="turnsCounter">0 turnos</span></div><div id="scoreboard" class="scoreboard"></div></section>
+            <section class="mocra-game-card"><div class="mocra-mount mocra-small" data-mocra></div><div><b>Mocra dice...</b><p id="mocraMessage" aria-live="polite">En democracia, ¡cada voz cuenta!</p></div></section>
+          </aside>
+        </div>
+      </section>
+
+      <section id="screen-end" class="screen" aria-labelledby="endTitle"><div class="end-card"><div class="confetti-stars">✦ ★ ✦</div><span class="trophy-big">🏆</span><div class="eyebrow">¡PARTIDA TERMINADA!</div><h2 id="endTitle">¡Gran aventura, <span>ciudadanos!</span></h2><p id="endSubtitle"></p><div class="mocra-mount mocra-medium" data-mocra></div><div id="finalScores" class="final-scores"></div><div class="end-actions"><button class="btn btn-primary" id="againBtn">Jugar otra vez ➜</button><button class="btn btn-outline" data-go="home">Volver al inicio</button></div><p class="end-lesson">“La democracia no se trata solo de ganar. Se trata de que todos puedan participar.” — Mocra</p></div></section>
+    </main>
+  </div>
+
+  <div class="modal-root" id="modalRoot" hidden>
+    <div class="modal-backdrop"></div>
+    <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modalDialog">
+      <div class="modal-header"><span id="modalTag" class="modal-tag">DEMOWAY</span><button type="button" id="modalClose" class="modal-close" aria-label="Cerrar">✕</button></div>
+      <div id="modalContent"></div>
+    </section>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <template id="mocraTemplate">
+    <svg viewBox="0 0 360 390" class="mocra-svg" role="img" aria-label="Mocra, un búho profesor con gafas, chaleco y un libro">
+      <defs>
+        <linearGradient id="mocraFur" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9474ea"/><stop offset=".55" stop-color="#7250bd"/><stop offset="1" stop-color="#55369c"/></linearGradient>
+        <linearGradient id="mocraVest" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#23c4af"/><stop offset="1" stop-color="#0a8e9d"/></linearGradient>
+        <linearGradient id="mocraGold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe994"/><stop offset="1" stop-color="#ffb93b"/></linearGradient>
+      </defs>
+      <ellipse cx="177" cy="353" rx="116" ry="18" fill="#100d43" opacity=".2"/>
+      <g class="owl-body">
+        <path d="M114 95 Q76 44 64 31 Q117 29 145 72 M216 71 Q259 32 300 30 Q275 59 256 101" fill="#6344b4" stroke="#342276" stroke-width="8" stroke-linejoin="round"/>
+        <path d="M99 247 Q43 244 25 279 Q13 300 40 305 Q69 309 102 293" class="owl-wing wing-left" fill="#8260d4" stroke="#4c2b9c" stroke-width="7"/>
+        <path d="M268 237 Q329 229 348 186 Q360 167 343 165 Q320 165 270 198" class="owl-wing wing-right" fill="#8260d4" stroke="#4c2b9c" stroke-width="7"/>
+        <path d="M102 163 Q97 110 154 89 Q205 71 252 120 Q284 153 282 231 Q286 329 186 341 Q83 334 87 241 Z" fill="url(#mocraFur)" stroke="#392475" stroke-width="8"/>
+        <path d="M122 220 Q176 190 247 222 L250 287 Q217 322 180 323 Q139 314 115 289 Z" fill="url(#mocraVest)" stroke="#125876" stroke-width="5"/>
+        <path d="M168 212 L180 310 L191 215" fill="#e4f9ef"/><path d="M176 210 L193 222 L182 245 L167 224 Z" fill="#ffba3e"/>
+        <circle cx="214" cy="269" r="9" fill="#ffd16c"/>
+        <path d="M122 303 L106 345 M234 305 L251 346" stroke="#dc8b3c" stroke-width="15" stroke-linecap="round"/>
+        <path d="M90 347 Q116 328 137 349 M225 348 Q251 328 273 348" fill="none" stroke="#f8bd61" stroke-width="14" stroke-linecap="round"/>
+        <path d="M90 115 Q76 77 102 63 L149 83 L177 106 L205 83 L257 62 Q285 88 267 124 Q283 147 267 186 Q252 215 193 221 L162 221 Q92 222 80 174 Q72 139 90 115" fill="url(#mocraFur)" stroke="#392475" stroke-width="7"/>
+        <path d="M93 135 Q97 100 138 102 Q164 100 180 127 Q202 97 232 103 Q271 108 268 144 Q267 193 221 199 Q191 198 179 178 Q165 203 133 200 Q90 194 93 135" fill="#fff9e9"/>
+        <ellipse cx="137" cy="150" rx="29" ry="32" fill="#fff"/><ellipse cx="220" cy="150" rx="29" ry="32" fill="#fff"/>
+        <g class="owl-eye"><ellipse cx="143" cy="153" rx="10" ry="17" fill="#33225f"/><circle cx="146" cy="147" r="4" fill="#fff"/></g>
+        <g class="owl-eye"><ellipse cx="214" cy="153" rx="10" ry="17" fill="#33225f"/><circle cx="217" cy="147" r="4" fill="#fff"/></g>
+        <g class="owl-glasses" fill="none" stroke="#33225f" stroke-width="9"><circle cx="135" cy="150" r="41"/><circle cx="222" cy="150" r="41"/><path d="M175 145 Q178 140 181 145 M95 136 L75 125 M263 135 L279 123"/></g>
+        <path d="M160 189 Q179 215 197 188 L179 182 Z" fill="url(#mocraGold)" stroke="#d67d26" stroke-width="4"/>
+        <path d="M163 208 Q179 221 195 207" stroke="#392475" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M112 82 Q179 57 246 83 L245 99 Q183 111 113 98 Z" fill="#2a1a56"/><path d="M142 74 L142 38 L211 30 L224 72" fill="#30205e"/><path d="M132 39 L208 16 L284 41 L209 65 Z" fill="#443279" stroke="#21164a" stroke-width="7"/><path d="M284 42 L284 87" stroke="#ffca62" stroke-width="5"/><circle cx="284" cy="91" r="9" fill="#ffca62"/>
+        <g transform="rotate(-12 265 302)"><path d="M223 288 Q254 269 300 281 L301 338 Q258 327 222 349 Z" fill="#fff7e9" stroke="#463282" stroke-width="5"/><path d="M223 288 Q195 267 176 283 L175 339 Q196 330 222 349 Z" fill="#ffe4a3" stroke="#463282" stroke-width="5"/><path d="M193 301 L212 305 M190 311 L211 315 M241 299 L277 294 M240 309 L284 304" stroke="#b9a2d3" stroke-width="3"/></g>
+      </g>
+      <g class="owl-stars" fill="#ffdb69"><path d="M25 89 l6 15 15 6 -15 6 -6 15 -6 -15 -15 -6 15 -6z"/><path d="M328 95 l4 11 11 4 -11 4 -4 11 -4 -11 -11 -4 11 -4z"/></g>
+    </svg>
+  </template>
+</body>
+</html>
